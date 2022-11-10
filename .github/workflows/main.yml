@@ -51,6 +51,6 @@ jobs:
           docker build . -t demo-kotlin2.0
           docker images -a
       - name: docker login
-        run: docker login -u ${{ secrets.dockerhubuser }} -p ${{ secrets.dockerhubpassword }}
+        run: docker login -u spostek -p Audrey04!
       - name: docker image push
         run: docker push demo-kotlin2.0    
