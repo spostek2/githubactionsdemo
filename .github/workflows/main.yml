@@ -51,6 +51,6 @@ jobs:
           docker build . -t demo-kotlin2.0
           docker images -a
       - name: docker login
-        run: docker login -u spostek --password-stdin {{ secrets.DOCKERHUBPASSWORD }}
+        run: docker login --username ${{ secrets.DOCKERHUBUSER }} -p ${{ secrets.DOCKERHUBPASSWORD }}
       - name: docker image push
         run: docker push demo-kotlin2.0    
