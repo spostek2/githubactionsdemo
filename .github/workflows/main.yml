@@ -46,7 +46,9 @@ jobs:
         with:
           resource-group: aks-1_group
           cluster-name: aks-1
-
+       
+      -run: |
+         kubectl create namespace githubrg  
 
       # Runs a set of commands using the runners shell test 2
       - name: Run a multi-line script
