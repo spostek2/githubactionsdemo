@@ -35,6 +35,8 @@ jobs:
         uses: azure/login@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        run: |
+          az webapp list --query "[?state=='Running']"  
       
       
       - name: Run AZ command
@@ -42,7 +44,7 @@ jobs:
           az account show
           az group list    
 
-      # Runs a set of commands using the runners shell 
+      # Runs a set of commands using the runners shell test 2
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
