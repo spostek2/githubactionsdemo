@@ -48,9 +48,10 @@ jobs:
           docker images -a
       - name: docker build
         run: |  
-          docker build . -t demo-kotlincreatedbysteve
+          docker build . -t demo-kotlincreatedbysteve:1.0.0
+          docker tag demo-kotlincreatedbysteve:1.0.0 spostek/demo-kotlincreatedbysteve:1.0.0 
           docker images -a
       - name: docker login
         run: docker login --username ${{ secrets.DOCKERHUBUSER }} -p ${{ secrets.DOCKERHUBPASSWORD }}
       - name: docker image push
-        run: docker push spostek/demo-kotlincreatedbysteve:latest   
+        run: docker push spostek/demo-kotlincreatedbysteve:1.0.0   
