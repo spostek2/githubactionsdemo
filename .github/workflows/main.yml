@@ -30,6 +30,7 @@ jobs:
         run: | 
            ls -al
 
+      #Add azure stuff
       - name: Log in with Azure Action
         uses: azure/login@v1
         with:
@@ -41,7 +42,7 @@ jobs:
           az account show
           az group list    
 
-      # Runs a set of commands using the runners shell
+      # Runs a set of commands using the runners shell 
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
