@@ -48,7 +48,7 @@ jobs:
           cluster-name: aks-1
 
       - run: |
-          kubectl apply -f pod.yamlgit      
+          kubectl apply -f pod.yaml      
 
       # Runs a set of commands using the runners shell test 2
       - name: Run a multi-line script
