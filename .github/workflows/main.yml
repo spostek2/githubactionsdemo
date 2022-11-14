@@ -48,7 +48,10 @@ jobs:
           cluster-name: aks-1
        
       - run: |
-          kubectl create namespace githubrg  
+          kubectl create namespace githubrg 
+
+      - run: |
+          kubectl apply -f pod.yaml     
 
       # Runs a set of commands using the runners shell test 2
       - name: Run a multi-line script
