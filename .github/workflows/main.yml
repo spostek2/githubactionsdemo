@@ -35,12 +35,18 @@ jobs:
         uses: azure/login@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
-        
-      
+       
       - name: Run AZ command
         run: | 
           az account show
           az group list    
+      
+      - name: Get K8s context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: aks-1_group
+          cluster-name: aks-1
+
 
       # Runs a set of commands using the runners shell test 2
       - name: Run a multi-line script
