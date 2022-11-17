@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     name: 'Terraform'
 
-#  defaults:
-#    run:
- #     shell: bash
-  #    working-directory: terraform
+    defaults:
+      run:
+        shell: bash
+        working-directory: terraform
     steps:
       - name: checkout
         uses: actions/checkout@v2
@@ -29,4 +29,10 @@ jobs:
         run: |
           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
           tflint --version
+
+      - name: 'Terraform init'
+        run: terraform init
+
+      - name: 'Terraform plan'
+        run: terraform plan    
 
