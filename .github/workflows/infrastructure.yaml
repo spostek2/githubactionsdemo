@@ -8,6 +8,7 @@ on:
 jobs:
   terraform:
     runs-on: ubuntu-latest
+    environment: prod
     name: 'Terraform'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
@@ -43,7 +44,8 @@ jobs:
     - name: Terraform Apply
       id: apply
       run: terraform apply -auto-approve
-      continue-on-error: true  
+      continue-on-error: true 
+
 
 
 
