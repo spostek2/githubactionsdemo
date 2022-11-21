@@ -18,29 +18,57 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: terraform
+        working-directory: "./terraform"
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+    - uses: hashicorp/setup-terraform@v2
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check
+      continue-on-error: true
 
-      - name: 'Install pre-reqs'
-        run: |
-          wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-          echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-          sudo apt update && sudo apt install terraform
-          terraform --version
+    - name: Terraform Init
+      id: init
+      run: terraform init
 
-      - name: 'Install TFLint'
-        run: |
-          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
-          tflint --version
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color
 
-      - name: 'Terraform init'
-        run: terraform init
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan -no-color
+      continue-on-error: true
 
-      - name: 'Terraform plan'
-        run: terraform plan
+      
 
-      - name: 'Terraform apply'
-        run: terraform apply -auto-approve      
+
+
+
+
+
+
+
+
+
+ #     - name: 'Install pre-reqs'
+ #       run: |
+ #         wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+ #         echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+ #         sudo apt update && sudo apt install terraform
+ #         terraform --version
+
+  #    - name: 'Install TFLint'
+   #     run: |
+   #       curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+   #       tflint --version
+
+  #    - name: 'Terraform init'
+  #      run: terraform init
+
+  #    - name: 'Terraform plan'
+  #      run: terraform plan
+
+  #    - name: 'Terraform apply'
+  #      run: terraform apply -auto-approve      
 
