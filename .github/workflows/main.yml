@@ -66,11 +66,24 @@ jobs:
           docker -v
           docker
           docker images -a
-      - name: docker build
-        run: |  
-          docker build . -t demo-kotlincreatedbysteve:1.0.0
-          docker tag demo-kotlincreatedbysteve:1.0.0 spostek/demo-kotlincreatedbysteve:1.0.0 
+      - name: use github_env var
+        run: |
+          echo "SHORTEN_SHA='echo ${GITHUB_SHA} | CUT -C1-8'" >> $GITHUB_ENV
+          echo $GITHUB_ENV
+      - name:  docker build using github environment
+        run: |
+          docker build . -t $SHORTEN_SHA
+          docker tag $SHORTEN_SHA spostek/$SHORTEN_SHA
           docker images -a
+
+      
+      
+      
+  #    - name: docker build
+  #      run: |  
+  #        docker build . -t demo-kotlincreatedbysteve:
+  #        docker tag demo-kotlincreatedbysteve:1.0.0 spostek/demo-kotlincreatedbysteve:1.0.0 
+  #        docker images -a
    #   - name: docker login
    #     run: docker login --username ${{ secrets.DOCKERHUBUSER }} -p ${{ secrets.DOCKERHUBPASSWORD }}
    #   - name: docker image push
@@ -87,7 +100,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: spostek/demo-kotlincreatedbysteve:1.0.0
+          tags: spostek/$SHORTEN_SHA
 
 
      
