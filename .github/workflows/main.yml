@@ -68,7 +68,7 @@ jobs:
           docker images -a
       - name: use github_env var
         run: |
-          echo "SHORTEN_SHA=`echo ${GITHUB_SHA} | CUT -C1-8`" >> $GITHUB_ENV
+          echo "SHORTEN_SHA=`echo ${GITHUB_SHA} | cut -C1-8`" >> $GITHUB_ENV
           echo $GITHUB_ENV
       - name:  docker build using github environment
         run: |
