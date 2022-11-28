@@ -72,12 +72,11 @@ jobs:
           echo $GITHUB_ENV
       - name:  docker build using github environment
         run: |
-          docker build . -t $SHORTEN_SHA
-          docker tag $SHORTEN_SHA spostek/$SHORTEN_SHA
+          docker build . -t demo-kotlincreatedbysteve:$SHORTEN_SHA
+          docker tag $SHORTEN_SHA spostek/demo-kotlincreatedbysteve:$SHORTEN_SHA
           docker images -a
 
-      
-      
+       
       
   #    - name: docker build
   #      run: |  
@@ -100,7 +99,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: spostek/$SHORTEN_SHA
+          tags: spostek/demo-kotlincreatedbysteve:$SHORTEN_SHA
 
 
      
