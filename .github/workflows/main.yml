@@ -73,7 +73,7 @@ jobs:
       - name:  docker build using github environment
         run: |
           echo $SHORTEN_SHA  
-          docker build -t spostek/$SHORTEN_SHA .
+          docker build -t spostek/demo-kotlincreatedbysteve:$SHORTEN_SHA .
          
       
   #       docker tag demo-kotlincreatedbysteve:$SHORTEN_SHA spostek/demo-kotlincreatedbysteve:$SHORTEN_SHA   
